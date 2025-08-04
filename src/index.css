@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #e87722;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d1651a;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-utk-orange hover:bg-utk-orange-dark text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border-2 border-utk-orange text-utk-orange hover:bg-utk-orange hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+  }
+  
+  .section-padding {
+    @apply py-16 px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-utk-orange to-utk-orange-light bg-clip-text text-transparent;
+  }
+  
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg;
+  }
+  
+  .hero-text {
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* React Bits component overrides */
+.split-parent {
+  overflow: visible !important;
+}
+
+.rotating-text-demo {
+  @apply flex items-center justify-center h-full;
+}
+
+.rotating-text-main {
+  @apply px-3 py-2 bg-utk-orange text-white overflow-hidden rounded-lg;
+}
+
+.rotating-text-split {
+  @apply overflow-hidden;
+}
+
+/* Glitch text custom styles for UTK theme */
+.glitch {
+  --after-shadow: -5px 0 #e87722;
+  --before-shadow: 5px 0 #1e40af;
+}
+
+/* Fuzzy text styles */
+.fuzzy-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  @apply inline-block w-8 h-8 border-4 border-gray-200 border-t-utk-orange rounded-full animate-spin;
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-to-content {
+  @apply absolute top-0 left-0 bg-utk-orange text-white px-4 py-2 rounded-br-lg transform -translate-y-full focus:translate-y-0 transition-transform duration-200 z-50;
+}
+
+/* Focus styles */
+.focus-visible {
+  @apply outline-none ring-2 ring-utk-orange ring-offset-2;
+}
