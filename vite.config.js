@@ -12,6 +12,10 @@ export default defineConfig({
     react() // Enables React JSX transformation and hot reload
   ],
   
+  // Configure base path for deployment
+  // Use relative paths for compatibility with both GitHub Pages and UTK hosting
+  base: './',
+  
   // Configure module resolution for cleaner imports
   resolve: {
     alias: {
@@ -34,5 +38,15 @@ export default defineConfig({
     outDir: 'dist',      // Output directory for built files
     assetsDir: 'assets', // Subdirectory for CSS, JS, and other assets
     // Vite automatically optimizes bundle size, code splitting, and compression
+    
+    // Ensure proper asset handling for subdirectory hosting
+    rollupOptions: {
+      output: {
+        // Use relative paths for assets
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js'
+      }
+    }
   },
 })
