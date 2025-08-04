@@ -1,73 +1,89 @@
+# GitHub Actions Workflow for EWB-UTK Website Deployment
+# This workflow automatically builds, tests, and deploys the website
+# Runs on every push to main/master branches and on pull requests
+
 name: Deploy EWB-UTK Website
 
+# Trigger conditions for this workflow
 on:
+  # Run on pushes to main or master branch
   push:
     branches: [ main, master ]
+  # Run on pull requests to main or master (for testing)
   pull_request:
     branches: [ main, master ]
 
 jobs:
+  # Main build and deployment job
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use latest Ubuntu environment
     
     steps:
+    # Step 1: Download repository code
     - name: Checkout code
       uses: actions/checkout@v4
       
+    # Step 2: Set up Node.js environment for React build
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
-        cache: 'npm'
+        node-version: '18'  # Use Node.js 18 LTS
+        cache: 'npm'        # Cache npm dependencies for faster builds
         
+    # Step 3: Install all project dependencies
     - name: Install dependencies
-      run: npm ci
+      run: npm ci  # Use 'ci' for faster, reproducible installs
       
+    # Step 4: Run code quality checks
     - name: Run ESLint
-      run: npm run lint
+      run: npm run lint  # Check for code quality issues
       
+    # Step 5: Build production-ready website
     - name: Build website
-      run: npm run build
+      run: npm run build  # Creates optimized files in dist/ folder
       
+    # Step 6: Save build artifacts for download/debugging
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: ewb-utk-website-dist
-        path: dist/
-        retention-days: 30
+        name: ewb-utk-website-dist  # Artifact name for downloads
+        path: dist/                 # Upload built website files
+        retention-days: 30          # Keep artifacts for 30 days
         
-    # Optional: Deploy to GitHub Pages for preview
+    # Step 7: Deploy to GitHub Pages (automatic public hosting)
+    # Only runs on main branch, not on pull requests
     - name: Deploy to GitHub Pages (Preview)
       if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Automatic GitHub token
+        publish_dir: ./dist                        # Directory to publish
         
-    # UTK Deployment (when SSH access is available)
+    # Step 8: Deploy to UTK hosting server (when configured)
+    # This is the official deployment for ewb.utk.edu
     - name: Deploy to UTK Server
       if: github.ref == 'refs/heads/main'
       env:
-        UTK_HOST: linux.oit.utk.edu
-        UTK_USERNAME: ${{ secrets.UTK_USERNAME }}
-        UTK_PRIVATE_KEY: ${{ secrets.UTK_PRIVATE_KEY }}
+        UTK_HOST: linux.oit.utk.edu                    # UTK's Linux server
+        UTK_USERNAME: ${{ secrets.UTK_USERNAME }}       # EWB's UTK account username
+        UTK_PRIVATE_KEY: ${{ secrets.UTK_PRIVATE_KEY }} # SSH private key for authentication
       run: |
-        # Install SSH client
+        # Install SSH client for secure file transfer
         sudo apt-get update
         sudo apt-get install -y openssh-client
         
-        # Setup SSH key
+        # Set up SSH authentication
         mkdir -p ~/.ssh
         echo "$UTK_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H $UTK_HOST >> ~/.ssh/known_hosts
+        chmod 600 ~/.ssh/id_rsa                    # Secure key permissions
+        ssh-keyscan -H $UTK_HOST >> ~/.ssh/known_hosts  # Add server to known hosts
         
-        # Upload files to UTK server
+        # Transfer built website files to UTK server
         echo "Uploading to UTK server..."
         scp -r dist/* $UTK_USERNAME@$UTK_HOST:~/public_html/
         
-        # Set correct permissions
+        # Set correct Unix permissions for web hosting
         ssh $UTK_USERNAME@$UTK_HOST "chmod 755 ~/public_html && chmod 644 ~/public_html/* && chmod 755 ~/public_html/assets && chmod 644 ~/public_html/assets/*"
         
         echo "✅ Deployment complete!"
-      if: false  # Disabled by default - enable when UTK credentials are set up
+      if: false  # Currently disabled - enable when UTK credentials are properly configured

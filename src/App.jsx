@@ -1,5 +1,10 @@
+// Main App Component for EWB-UTK Website
+// This is the root component that orchestrates all page sections and global functionality
+
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Import all page sections
 import Header from './components/sections/Header';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
@@ -8,7 +13,7 @@ import GetInvolved from './components/sections/GetInvolved';
 import Contact from './components/sections/Contact';
 import Footer from './components/sections/Footer';
 
-// Loading Component
+// Loading Screen Component - Shows animated loading while app initializes
 const LoadingScreen = ({ isLoading }) => {
   return (
     <AnimatePresence>
@@ -20,11 +25,14 @@ const LoadingScreen = ({ isLoading }) => {
           className="fixed inset-0 z-50 bg-gray-900 flex items-center justify-center"
         >
           <div className="text-center">
+            {/* Spinning loader with UTK orange accent */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="w-16 h-16 border-4 border-gray-700 border-t-utk-orange rounded-full mx-auto mb-4"
             />
+            
+            {/* Loading text with staggered animations */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -48,11 +56,12 @@ const LoadingScreen = ({ isLoading }) => {
   );
 };
 
-// Scroll to Top Button Component
+// Scroll to Top Button - Appears after user scrolls down 300px
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = React.useState(false);
 
   useEffect(() => {
+    // Function to toggle button visibility based on scroll position
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
         setIsVisible(true);
@@ -61,10 +70,14 @@ const ScrollToTop = () => {
       }
     };
 
+    // Add scroll event listener
     window.addEventListener('scroll', toggleVisibility);
+    
+    // Cleanup event listener on component unmount
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
+  // Smooth scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -85,6 +98,7 @@ const ScrollToTop = () => {
           className="fixed bottom-8 right-8 z-40 w-12 h-12 bg-gradient-to-r from-utk-orange to-utk-orange-dark text-white rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center"
           aria-label="Scroll to top"
         >
+          {/* Up arrow icon */}
           <svg
             className="w-6 h-6"
             fill="none"
@@ -104,7 +118,8 @@ const ScrollToTop = () => {
   );
 };
 
-// Skip to Content Link for Accessibility
+// Skip to Content Link - Accessibility feature for keyboard navigation
+// Hidden by default, becomes visible when focused (Tab key)
 const SkipToContent = () => {
   return (
     <a
@@ -116,42 +131,63 @@ const SkipToContent = () => {
   );
 };
 
+// Main App Component
 function App() {
+  // State to control loading screen visibility
   const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
-    // Simulate loading time for initial animations and assets
+    // Simulate loading time for initial animations and asset loading
+    // This provides time for fonts, images, and animations to initialize
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
 
+    // Cleanup timer on component unmount
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="App">
+      {/* Loading screen overlay */}
       <LoadingScreen isLoading={isLoading} />
+      
+      {/* Accessibility: Skip to main content link */}
       <SkipToContent />
       
+      {/* Main website content - fades in after loading */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
       >
+        {/* Fixed header navigation */}
         <Header />
         
+        {/* Main content sections */}
         <main id="main-content">
+          {/* Hero section with landing animation */}
           <section id="home">
             <Hero />
           </section>
           
+          {/* About Us section */}
           <About />
+          
+          {/* Projects showcase */}
           <Projects />
+          
+          {/* Get Involved/Join Us section */}
           <GetInvolved />
+          
+          {/* Contact form and information */}
           <Contact />
         </main>
         
+        {/* Footer with links and information */}
         <Footer />
+        
+        {/* Scroll to top button (appears on scroll) */}
         <ScrollToTop />
       </motion.div>
     </div>
