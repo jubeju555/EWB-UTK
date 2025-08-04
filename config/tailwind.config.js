@@ -5,8 +5,9 @@
 export default {
   // Specify which files to scan for CSS classes (for tree-shaking unused styles)
   content: [
-    "./index.html",                    // Main HTML file
-    "./src/**/*.{js,ts,jsx,tsx}",     // All source files (JavaScript, TypeScript, JSX, TSX)
+    "../index.html",                    // Main HTML file
+    "../src/**/*.{js,ts,jsx,tsx}",     // All source files (JavaScript, TypeScript, JSX, TSX)
+    "../public/**/*.html",             // Public HTML files
   ],
   
   theme: {

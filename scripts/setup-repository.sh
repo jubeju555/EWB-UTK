@@ -5,6 +5,9 @@
 
 echo "🏗️  Setting up EWB-UTK website repository..."
 
+# Navigate to project root (script is in scripts/ folder)
+cd "$(dirname "$0")/.."
+
 # Check if git is initialized
 if [ ! -d ".git" ]; then
     echo "📝 Initializing Git repository..."

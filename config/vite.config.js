@@ -20,10 +20,10 @@ export default defineConfig({
   resolve: {
     alias: {
       // Enable @/ imports for src folder (e.g., import Component from '@/components/Component')
-      '@': path.resolve(__dirname, './src'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@assets': path.resolve(__dirname, './src/assets'),
-      '@utils': path.resolve(__dirname, './src/utils'),
+      '@': path.resolve(__dirname, '../src'),
+      '@components': path.resolve(__dirname, '../src/components'),
+      '@assets': path.resolve(__dirname, '../src/assets'),
+      '@utils': path.resolve(__dirname, '../src/utils'),
     },
   },
   
@@ -35,7 +35,7 @@ export default defineConfig({
   
   // Production build configuration
   build: {
-    outDir: 'dist',      // Output directory for built files
+    outDir: '../dist',      // Output directory for built files (relative to config folder)
     assetsDir: 'assets', // Subdirectory for CSS, JS, and other assets
     // Vite automatically optimizes bundle size, code splitting, and compression
     

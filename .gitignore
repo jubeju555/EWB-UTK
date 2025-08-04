@@ -108,6 +108,11 @@ jspm_packages/
 ehthumbs.db
 Thumbs.db
 
-# Legacy theme files (keep for reference)
+# Legacy theme files (keep in assets-legacy/ for reference)
 legacy/
 old-theme/
+
+# Organized structure - ignore old locations if accidentally created
+/config.bak/
+/scripts.bak/
+/docs.bak/

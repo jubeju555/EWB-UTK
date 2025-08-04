@@ -5,6 +5,9 @@
 
 echo "🚀 Preparing EWB-UTK website for deployment..."
 
+# Navigate to project root (script is in scripts/ folder)
+cd "$(dirname "$0")/.."
+
 # Build the production version
 echo "📦 Building production version..."
 npm run build

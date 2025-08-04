@@ -64,31 +64,24 @@ A modern, interactive website for the Engineers Without Borders chapter at the U
    npm run preview
    ```
 
+For detailed setup instructions, see [`docs/FILE_STRUCTURE.md`](./FILE_STRUCTURE.md) for the complete workflow guide.
+
 ## 🎯 Project Structure
 
 ```
-src/
-├── components/
-│   ├── animations/          # Reusable animation components
-│   │   ├── SplitText.jsx
-│   │   ├── RotatingText.jsx
-│   │   ├── DecryptedText.jsx
-│   │   ├── CircularText.jsx
-│   │   └── GlitchText.jsx
-│   └── sections/            # Page sections
-│       ├── Header.jsx
-│       ├── Hero.jsx
-│       ├── About.jsx
-│       ├── Projects.jsx
-│       ├── GetInvolved.jsx
-│       ├── Contact.jsx
-│       └── Footer.jsx
-├── assets/                  # Static assets
-├── utils/                   # Utility functions
-├── App.jsx                  # Main app component
-├── main.jsx                # Entry point
-└── index.css               # Global styles
+EWB-UTK/
+├── 📁 docs/                    # Documentation and guides
+├── 📁 config/                  # Configuration files  
+├── 📁 scripts/                 # Deployment and setup scripts
+├── 📁 src/                     # React source code
+│   ├── components/             # React components
+│   │   ├── animations/         # Reusable animations
+│   │   └── sections/           # Page sections
+├── 📁 public/                  # Static assets
+└── 📁 assets-legacy/           # Legacy files (archive)
 ```
+
+For detailed file structure documentation, see [`docs/FILE_STRUCTURE.md`](./FILE_STRUCTURE.md).
 
 ## 🎨 Customization
 
