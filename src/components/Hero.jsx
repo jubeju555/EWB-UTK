@@ -92,10 +92,7 @@ const Hero = () => {
           {/* Main Heading */}
           <motion.div variants={itemVariants} className="space-y-4">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold tracking-tight">
-              <span className="block text-white">Engineers</span>
-              <span className="block bg-gradient-to-r from-primary-500 via-accent-orange to-accent-gold bg-clip-text text-transparent">
-                Without Borders
-              </span>
+              <span className="block text-white">Engineers Without Borders</span>
               <span className="block text-2xl sm:text-3xl lg:text-4xl font-medium text-neutral-300 mt-4">
                 University of Tennessee
               </span>

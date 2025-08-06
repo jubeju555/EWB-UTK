@@ -8,6 +8,27 @@
 2. **Start development**: `npm run dev`
 3. **Build for production**: `npm run build`
 
+## 🔄 **UPDATE WEBSITE WITH CHANGES**
+
+**After editing any React components, run this command to deploy your changes:**
+
+```bash
+cp index-dev.html index.html; npm run build; cp dist/index.html . && cp dist/assets/* assets/
+```
+
+**What this does:**
+1. `cp index-dev.html index.html` - Reset to clean HTML template
+2. `npm run build` - Build your React code into optimized files  
+3. `cp dist/index.html . && cp dist/assets/* assets/` - Deploy to public website
+
+**Files you can edit:**
+- `src/components/Hero.jsx` - Main landing section
+- `src/components/About.jsx` - About section  
+- `src/components/Projects.jsx` - Projects section
+- `src/components/ExecBoard.jsx` - Team/Leadership section
+- `src/components/GetInvolved.jsx` - Get Involved section
+- `src/components/Footer.jsx` - Footer section
+
 ## 📁 Project Organization
 
 ```

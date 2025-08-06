@@ -39,7 +39,7 @@ const ExecBoard = () => {
       linkedin: "#"
     },
     {
-      name: "Sarah Chen",
+      name: "Bryce Jardret",
       title: "Vice President",
       image: "/images/sarah.jpg",
       bio: "Supporting operations and member engagement initiatives.",
@@ -55,7 +55,7 @@ const ExecBoard = () => {
       linkedin: "#"
     },
     {
-      name: "Marcus Johnson",
+      name: "Lauren King",
       title: "International Lead",
       image: "/images/marcus.jpg",
       bio: "Coordinating international partnerships and community projects.",
@@ -63,7 +63,7 @@ const ExecBoard = () => {
       linkedin: "#"
     },
     {
-      name: "Emily Rodriguez",
+      name: "Justin Ray",
       title: "Project Lead",
       image: "/images/emily.jpg",
       bio: "Leading technical project development and implementation.",
