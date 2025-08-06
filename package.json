@@ -4,21 +4,23 @@
   "description": "Engineers Without Borders - University of Tennessee Knoxville Chapter Website",
   "type": "module",
   "scripts": {
-    "dev": "vite --config config/vite.config.js",
-    "build": "vite build --config config/vite.config.js",
-    "preview": "vite preview --config config/vite.config.js",
-    "lint": "eslint . --ext js,jsx --config config/.eslintrc.json --report-unused-disable-directives --max-warnings 0"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@react-three/drei": "^9.88.13",
+    "@react-three/fiber": "^8.15.11",
     "framer-motion": "^10.16.5",
     "gsap": "^3.12.2",
+    "lucide-react": "^0.294.0",
     "matter-js": "^0.19.0",
-    "three": "^0.158.0",
-    "@react-three/fiber": "^8.15.11",
-    "@react-three/drei": "^9.88.13",
-    "lucide-react": "^0.294.0"
+    "react": "^18.2.0",
+    "react-calendar": "^6.0.0",
+    "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.16.0",
+    "three": "^0.158.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

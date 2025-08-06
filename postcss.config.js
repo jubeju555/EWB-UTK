@@ -5,7 +5,7 @@
 export default {
   plugins: {
     // Process Tailwind CSS directives (@tailwind base, components, utilities)
-    tailwindcss: { config: './config/tailwind.config.js' },
+    tailwindcss: {},
     
     // Automatically add vendor prefixes for browser compatibility
     // Ensures CSS works across all modern browsers

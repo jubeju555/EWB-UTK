@@ -7,11 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Import all page sections
 import Header from './components/sections/Header';
 import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import Projects from './components/sections/Projects';
-import GetInvolved from './components/sections/GetInvolved';
-import Contact from './components/sections/Contact';
-import Footer from './components/sections/Footer';
+import About from './components/About';
+import Projects from './components/Projects';
+import ExecBoard from './components/ExecBoard';
+import GetInvolved from './components/GetInvolved';
+import Footer from './components/Footer';
 
 // Loading Screen Component - Shows animated loading while app initializes
 const LoadingScreen = ({ isLoading }) => {
@@ -177,11 +177,13 @@ function App() {
           {/* Projects showcase */}
           <Projects />
           
+          {/* Leadership Team section */}
+          <section id="leadership-team">
+            <ExecBoard />
+          </section>
+          
           {/* Get Involved/Join Us section */}
           <GetInvolved />
-          
-          {/* Contact form and information */}
-          <Contact />
         </main>
         
         {/* Footer with links and information */}
