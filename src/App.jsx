@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Import all page sections
 import Header from './components/sections/Header';
-import Hero from './components/sections/Hero';
+import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import ExecBoard from './components/ExecBoard';

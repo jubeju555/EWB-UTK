@@ -1,0 +1,21 @@
+# Cache Control for EWB-UTK Website
+# Prevent browser caching issues with dynamic content updates
+
+# Force browsers to revalidate JavaScript and CSS files
+<FilesMatch "\.(js|css)$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# Allow caching for images and static assets (but not too long)
+<FilesMatch "\.(jpg|jpeg|png|gif|svg|ico|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "public, max-age=86400"
+</FilesMatch>
+
+# Force HTML files to always revalidate
+<FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>

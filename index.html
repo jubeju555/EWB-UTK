@@ -1,185 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Engineers Without Borders – UTK | Building Sustainable Solutions Worldwide</title>
-  
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Engineers Without Borders UTK Chapter creates sustainable engineering solutions for communities worldwide. Join our mission to empower communities through innovation and partnership." />
-  <meta name="keywords" content="Engineers Without Borders, UTK, University of Tennessee, sustainable engineering, community development, international projects, student organization" />
-  <meta name="author" content="Engineers Without Borders - UTK Chapter" />
-  
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Engineers Without Borders – UTK" />
-  <meta property="og:description" content="Empowering communities through sustainable engineering solutions. Join our mission to create lasting impact worldwide." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ewb-utk.org" />
-  <meta property="og:image" content="/images/og-image.jpg" />
-  
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Engineers Without Borders – UTK" />
-  <meta name="twitter:description" content="Empowering communities through sustainable engineering solutions." />
-  <meta name="twitter:image" content="/images/twitter-image.jpg" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAABMLAAATCwAAAAAAAAAAAAAAgv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//9Aof//////////////////////////////////ZbT//yuX//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//JJT//7ve////////////////////////u97//ySU//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//qNT/////////////qNT//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//2W0/////////////2W0//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//9gsf////////////9gsf//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//YLH/////////////YLH//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//2Cx/////////////2Cx//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//zCa//8ckP//AIL//wCC//9gsf////////////9gsf//AIL//wCC//8ckP//MJr//wCC//8Agv//AIL//wCC////////0Oj//wiG//8Agv//fb//////////////fb///wCC//8Ihv//0Oj///////8Agv//AIL//wCC//8Agv/////////////j8f//zOb////////////////////////M5v//4/H/////////////AIL//wCC//8Agv//AIL//////////////////////////////////////////////////////////////////wCC//8Agv//AIL//wCC//////////////////////////////////////////////////////////////////8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AIL//wCC//8Agv//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASUkAAFRUAAAsLAAAeHgAAICAAACAgAAAgIAAAICAAAB5eQ==" />
-  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJ9JREFUeNpi/N/EQBJgYiARsEDp2v+E1TYzkmMDqoZPTxien0URAXKBgtg1vLzIMFWVYY4Jw4E6qAiQAeQCBYFS6H6Ybcjw7Q3Dnx9gex7DLAQzgIIrfBi4RFA1vLiAz+FAV8EcRqGnydTAzIrOIKBBwRmdgVODkApDzG4G7XAoF8gAcoGCODXwyjAouqCIALkKjgyi2nABRpqnVoAAAwCDcSv9uSEdcAAAAABJRU5ErkJggg==" />
-  <link rel="apple-touch-icon" sizes="114x114" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAByCAIAAAAAvxIqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAx5JREFUeNrs3UFIFGEYxvFndQ3NJDUpSbNM0Q5RFBYJFUZR5MGCyEOHqEtQXb1KkNegW4eIKIsOUhEeioJgIUgsKpKMCjMSMzPJrEytbHuXOgVbO+vszu7s/8HjvO/37m/HdWZXPwPh4yKuJwsCWGGFlcAKK6wEVlhhJbDCCitxK0EHx7aGM5qqLcDZyosArARWWGElsMIKK4EVVlgJrLDCSmCFFVYSLcGErzD6TM+vaei+xgc0OarcQhWUa9EqVe1QxSYpkJhVwxq4o5c39a5Hnwc19VF5JZpfocXrVLtbJSsS/aADDn4b2+lnWa9uK9Sqwa6oBxQtV32L1h5SINs9zxk9PK2uExrrj3pMeb0a2lS51VlnJ59lJYb1x6SuH9HjczEdXLpGezpUXO2C6Yc+XWnW8KOYDl59QI2nFMxLBGsCXlunP+nCtlhNLaZwpk5D92a7rnWwPjGaWmxCm9OmTYMfWeGfurxXg3cdPhPjurhd75/Gv67VWgfr4yg2p01rM6c6a/dJ9d+K6xwfV+fB+Ne1Wqemv2PT2swpzTo1ptCx+Mu/jnhTazPb5KnL2tOu7xPpd5FpM9vkqcva25Gul+9uT+4e68w3vX2Qrqw2uc3vzV1W+5b/XKvOTKcrq01+frODa1g3WV+H/Hwb/6abt1pSPbDCCiusBFZYYSWwwgorgRVWWAmssMJKYIUVVgIrrLASWGGFlcAKK6wEVlijJpDlTa3PWfNLvan1OeuCGm9qfc5att6bWp+zVu30ptbPrEs2qnBZ/OVWax1g/Tv1Ld538Bvr0gbV7pptE+tgfWD9k9wiNZ11p5X1sW6wKmeumq+qsNKdbtbHulnPjGYtKNP+kMvfudbNelrnTGTNnqO6ozrcG9mTxvVYT+ts/W0Vr+7Dk/oPSXPyVb5B1Y1auU/zEn+7+WVYTy6p70ZkG57k/kV+UlhrmiI7+eQvTAblP4gnRiI7Hb3oTMJqwWQ8pLziyMZX3saeUfuySTLu5tVHgRVWWGElsMIKK4E1HZLc9wQ4WwmssMJKYIUVVgIrrLASWGGFlcCaEvklwACxDLmzKf56JQAAAABJRU5ErkJggg==" />
-  
-  <!-- Preconnect to external domains for better performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  
-  <!-- Accessibility -->
-  <meta name="theme-color" content="#e87722" />
-  
-  <!-- Performance hints -->
-  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-  <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  
-  <!-- Schema.org structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Engineers Without Borders - UTK Chapter",
-    "url": "https://ewb-utk.org",
-    "logo": "https://ewb-utk.org/images/logo.png",
-    "description": "Student organization at University of Tennessee Knoxville focused on sustainable engineering solutions for communities worldwide",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Knoxville",
-      "addressRegion": "Tennessee",
-      "addressCountry": "United States"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "",
-      "contactType": "General Inquiries",
-      "email": "ewb@utk.edu"
-    },
-    "sameAs": [
-      "https://instagram.com/ewb_utk",
-      "https://www.ewb-usa.org"
-    ]
-  }
-  </script>
-  
-  <!-- Critical CSS inlined for faster initial render -->
-  <style>
-    /* Critical CSS for above-the-fold content */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Engineers Without Borders - UTK Chapter. Creating sustainable engineering solutions for communities worldwide through innovation, partnership, and social responsibility." />
+    <meta name="keywords" content="Engineers Without Borders, UTK, University of Tennessee, Engineering, Community Development, Social Impact" />
     
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      color: #1f2937;
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-      overflow-x: hidden;
-    }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    #root {
-      min-height: 100vh;
-    }
+    <title>Engineers Without Borders - UTK Chapter</title>
+    <script type="module" crossorigin src="/~ewb/assets/index-8d6e2103.js"></script>
+    <link rel="stylesheet" href="/~ewb/assets/index-75a08c4b.css">
+  </head>
+  <body>
+    <div id="root"></div>
     
-    .loading-fallback {
-      position: fixed;
-      inset: 0;
-      background: #1f2937;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #374151;
-      border-top: 4px solid #e87722;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    /* Ensure smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    /* Focus styles for accessibility */
-    *:focus-visible {
-      outline: 2px solid #e87722;
-      outline-offset: 2px;
-    }
-  </style>
-  
-  
-  <script type="module" crossorigin src="./assets/index-16a5aae5.js"></script>
-  <link rel="stylesheet" href="./assets/index-98f58a16.css">
-</head>
-<body>
-  <!-- Loading fallback for users with JavaScript disabled -->
-  <noscript>
-    <div style="padding: 2rem; text-align: center; background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;">
-      <h1>JavaScript Required</h1>
-      <p>This website requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
-    </div>
-  </noscript>
-  
-  <!-- Loading indicator -->
-  <div id="loading-fallback" class="loading-fallback">
-    <div style="text-align: center; color: white;">
-      <div class="loading-spinner" style="margin: 0 auto 1rem;"></div>
-      <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Engineers Without Borders</h2>
-      <p style="color: #e87722;">UTK Chapter</p>
-    </div>
-  </div>
-  
-  <!-- Skip to main content link for screen readers -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-orange-600 text-white px-4 py-2 z-50 rounded-br-lg transition-transform transform -translate-y-full focus:translate-y-0">
-    Skip to main content
-  </a>
-  
-  <!-- React App Root -->
-  <div id="root"></div>
-  
-  <!-- Remove loading fallback when React app loads -->
-  <script>
-    // Remove loading fallback once React starts loading
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        const loadingEl = document.getElementById('loading-fallback');
-        if (loadingEl && document.getElementById('root').children.length > 0) {
-          loadingEl.style.display = 'none';
-        }
-      }, 100);
-    });
-  </script>
-  
-  <!-- Module script for Vite -->
-  
-  
-  <!-- Service Worker for Progressive Web App features (optional) -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').catch(function(error) {
-          console.log('ServiceWorker registration failed: ', error);
-        });
-      });
-    }
-  </script>
-</body>
+  </body>
 </html>
-
