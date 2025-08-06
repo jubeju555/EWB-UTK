@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: http://volweb2.utk.edu/~ewb/sitemap.xml
