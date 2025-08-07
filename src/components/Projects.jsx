@@ -147,10 +147,10 @@ const Projects = () => {
           variants={itemVariants}
           className="text-center p-8 md:p-12 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl border border-primary-500/20 shadow-2xl"
         >
-          <h3 className="text-3xl font-heading font-bold text-white mb-6">
+          <h3 className="text-3xl font-heading font-bold text-Black mb-6">
             Help Us Shape Our First Impact Project
           </h3>
-          <p className="text-xl text-gray-100 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-xl text-Dark gray-100 max-w-3xl mx-auto mb-8 leading-relaxed">
             We're actively seeking partnerships with communities, faculty, and students 
             who share our vision of using engineering to create positive change. Your 
             involvement can help determine the direction of our inaugural projects.
