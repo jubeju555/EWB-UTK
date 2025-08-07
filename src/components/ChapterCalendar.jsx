@@ -1,12 +1,115 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Calendar from 'react-calendar'
+import { ChevronDown, Calendar as CalendarIcon, Download } from 'lucide-react'
 import 'react-calendar/dist/Calendar.css'
 
 const ChapterCalendar = () => {
   const [date, setDate] = useState(new Date())
   const [showModal, setShowModal] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState(null)
+  const [showCalendarDropdown, setShowCalendarDropdown] = useState(false)
+  const dropdownRef = useRef(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowCalendarDropdown(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  // Utility function to format date for calendar URLs
+  const formatDateForCalendar = (date, time) => {
+    const eventDate = new Date(date)
+    const [timeStr, ampm] = time.split(' ')
+    const [hours, minutes] = timeStr.split(':')
+    let hour24 = parseInt(hours)
+    
+    if (ampm === 'PM' && hour24 !== 12) hour24 += 12
+    if (ampm === 'AM' && hour24 === 12) hour24 = 0
+    
+    eventDate.setHours(hour24, parseInt(minutes), 0, 0)
+    
+    // Format as YYYYMMDDTHHMMSSZ
+    return eventDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+  }
+
+  // Generate calendar links for different providers
+  const generateCalendarLinks = (event) => {
+    const startTime = formatDateForCalendar(event.date, event.time)
+    const endDate = new Date(event.date)
+    const [timeStr, ampm] = event.time.split(' ')
+    const [hours, minutes] = timeStr.split(':')
+    let hour24 = parseInt(hours)
+    
+    if (ampm === 'PM' && hour24 !== 12) hour24 += 12
+    if (ampm === 'AM' && hour24 === 12) hour24 = 0
+    
+    endDate.setHours(hour24 + 1, parseInt(minutes), 0, 0) // 1 hour duration
+    const endTime = endDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+    
+    const title = encodeURIComponent(event.title)
+    const description = encodeURIComponent(event.description || `${event.title} - Engineers Without Borders UTK Chapter`)
+    const location = encodeURIComponent(event.location)
+    
+    return {
+      google: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${description}&location=${location}`,
+      outlook: `https://outlook.live.com/calendar/0/deeplink/compose?subject=${title}&startdt=${startTime}&enddt=${endTime}&body=${description}&location=${location}`,
+      office365: `https://outlook.office.com/calendar/0/deeplink/compose?subject=${title}&startdt=${startTime}&enddt=${endTime}&body=${description}&location=${location}`,
+      yahoo: `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${title}&st=${startTime}&et=${endTime}&desc=${description}&in_loc=${location}`
+    }
+  }
+
+  // Generate ICS file content
+  const generateICSFile = (event) => {
+    const startTime = formatDateForCalendar(event.date, event.time)
+    const endDate = new Date(event.date)
+    const [timeStr, ampm] = event.time.split(' ')
+    const [hours, minutes] = timeStr.split(':')
+    let hour24 = parseInt(hours)
+    
+    if (ampm === 'PM' && hour24 !== 12) hour24 += 12
+    if (ampm === 'AM' && hour24 === 12) hour24 = 0
+    
+    endDate.setHours(hour24 + 1, parseInt(minutes), 0, 0)
+    const endTime = endDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+    
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Engineers Without Borders UTK//Event//EN
+BEGIN:VEVENT
+UID:${Date.now()}@ewb-utk.org
+DTSTART:${startTime}
+DTEND:${endTime}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description || `${event.title} - Engineers Without Borders UTK Chapter`}
+LOCATION:${event.location}
+ORGANIZER:CN=Engineers Without Borders UTK:MAILTO:ewb@utk.edu
+END:VEVENT
+END:VCALENDAR`
+    
+    return icsContent
+  }
+
+  // Download ICS file
+  const downloadICSFile = (event) => {
+    const icsContent = generateICSFile(event)
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `${event.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.ics`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    setShowCalendarDropdown(false)
+  }
 
   // Sample events data - in production, this could come from a JSON file or CMS
   const events = [
@@ -293,19 +396,96 @@ const ChapterCalendar = () => {
                 )}
               </div>
               
-              <div className="mt-6 flex gap-3">
+              {/* Add to Calendar Section */}
+              <div className="mt-6 relative" ref={dropdownRef}>
                 <button
-                  onClick={() => setShowModal(false)}
-                  className="btn-secondary flex-1 text-sm"
+                  onClick={() => setShowCalendarDropdown(!showCalendarDropdown)}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-utk-orange to-utk-orange-dark text-white rounded-xl hover:shadow-lg transition-all duration-300 group"
                 >
-                  Got it!
+                  <CalendarIcon size={18} />
+                  <span className="font-medium">Add to Calendar</span>
+                  <ChevronDown 
+                    size={16} 
+                    className={`transition-transform duration-200 ${showCalendarDropdown ? 'rotate-180' : ''}`}
+                  />
                 </button>
-                <a
-                  href="mailto:ewb@utk.edu?subject=Question about upcoming event"
-                  className="btn-primary flex-1 text-sm text-center"
-                >
-                  Ask Question
-                </a>
+
+                <AnimatePresence>
+                  {showCalendarDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border border-gray-200 shadow-2xl z-50 overflow-hidden max-h-80 overflow-y-auto"
+                      style={{
+                        maxHeight: 'min(20rem, calc(100vh - 200px))'
+                      }}
+                    >
+                      {(() => {
+                        const links = generateCalendarLinks(selectedEvent)
+                        return (
+                          <div className="py-2">
+                            <a
+                              href={links.google}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-gray-700 hover:text-utk-orange"
+                              onClick={() => setShowCalendarDropdown(false)}
+                            >
+                              <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-green-500 rounded"></div>
+                              <span className="font-medium">Google Calendar</span>
+                            </a>
+                            
+                            <a
+                              href={links.outlook}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-gray-700 hover:text-utk-orange"
+                              onClick={() => setShowCalendarDropdown(false)}
+                            >
+                              <div className="w-5 h-5 bg-blue-600 rounded"></div>
+                              <span className="font-medium">Outlook.com</span>
+                            </a>
+                            
+                            <a
+                              href={links.office365}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-gray-700 hover:text-utk-orange"
+                              onClick={() => setShowCalendarDropdown(false)}
+                            >
+                              <div className="w-5 h-5 bg-blue-700 rounded"></div>
+                              <span className="font-medium">Office 365</span>
+                            </a>
+                            
+                            <a
+                              href={links.yahoo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-gray-700 hover:text-utk-orange"
+                              onClick={() => setShowCalendarDropdown(false)}
+                            >
+                              <div className="w-5 h-5 bg-purple-600 rounded"></div>
+                              <span className="font-medium">Yahoo Calendar</span>
+                            </a>
+                            
+                            <div className="border-t border-gray-100 mt-1 pt-1">
+                              <button
+                                onClick={() => downloadICSFile(selectedEvent)}
+                                className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-gray-700 hover:text-utk-orange w-full text-left"
+                              >
+                                <Download size={20} className="text-gray-500" />
+                                <span className="font-medium">Download .ics file</span>
+                                <span className="text-xs text-gray-500 ml-auto">(Apple Calendar, etc.)</span>
+                              </button>
+                            </div>
+                          </div>
+                        )
+                      })()}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
           </motion.div>
