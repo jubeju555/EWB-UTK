@@ -43,7 +43,7 @@ const ExecBoard = () => {
       title: "Vice President",
       image: "/images/sarah.jpg",
       bio: "Supporting operations and member engagement initiatives.",
-      email: "schen@utk.edu",
+      email: "mjardret@vols.utk.edu",
       linkedin: "#"
     },
     {
@@ -59,7 +59,7 @@ const ExecBoard = () => {
       title: "International Lead",
       image: "/images/marcus.jpg",
       bio: "Coordinating international partnerships and community projects.",
-      email: "mjohnson@utk.edu",
+      email: "ysn618@vols.utk.edu",
       linkedin: "#"
     },
     {
@@ -67,7 +67,7 @@ const ExecBoard = () => {
       title: "Project Lead",
       image: "/images/emily.jpg",
       bio: "Leading technical project development and implementation.",
-      email: "erodriguez@utk.edu",
+      email: "jray44@vols.utk.edu",
       linkedin: "#"
     }
   ]
