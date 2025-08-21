@@ -72,6 +72,7 @@ const ExecBoard = () => {
     }
   ]
 
+  
   const MemberCard = ({ member, index }) => (
     <motion.div
       variants={itemVariants}
